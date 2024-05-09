@@ -1,0 +1,45 @@
+{
+	"version": "https://jsonfeed.org/version/1",
+	"title": "Evan Lovely",
+	"icon": "https://micro.blog/EvanLovely/avatar.jpg",
+	"home_page_url": "https://www.evanlovely.com/",
+	"feed_url": "https://www.evanlovely.com/feed.json",
+	"items": [
+		
+			{
+				"id": "http://evanlovely.micro.blog/2024/05/09/a-case-study.html",
+				"title": "A case study of Client Side Rendering",
+				"content_html": "<p>Wow, <a href=\"https://github.com/theninthsky/client-side-rendering\">this</a> has to be one of the best write ups of how to optimize your Webpack config that I’ve seen. Great dive into React page routing optimization as well.</p>\n",
+				"content_text": "Wow, [this](https://github.com/theninthsky/client-side-rendering) has to be one of the best write ups of how to optimize your Webpack config that I’ve seen. Great dive into React page routing optimization as well. \n",
+				"date_published": "2024-05-09T09:15:56-07:00",
+				"url": "https://www.evanlovely.com/2024/05/09/a-case-study.html",
+				"tags": ["Code"]
+			},
+			{
+				"id": "http://evanlovely.micro.blog/2023/01/28/great-sunset-clouds.html",
+				
+				"content_html": "<p>Great sunset clouds by Mt Hood</p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "Great sunset clouds by Mt Hood\n\n<img src=\"uploads/2023/292ccb048e.jpg\" width=\"600\" height=\"321\" alt=\"\">\n",
+				"date_published": "2023-01-28T09:02:16-07:00",
+				"url": "https://www.evanlovely.com/2023/01/28/great-sunset-clouds.html",
+				"tags": ["Photos"]
+			},
+			{
+				"id": "http://evanlovely.micro.blog/2023/01/27/the-readability-of.html",
+				
+				"content_html": "<p>The readability of bash always makes me think about how it was made by people who used to be legitimately concerned that more characters used in code actually made a program slower.</p>\n",
+				"content_text": "The readability of bash always makes me think about how it was made by people who used to be legitimately concerned that more characters used in code actually made a program slower.\n",
+				"date_published": "2023-01-27T10:54:32-07:00",
+				"url": "https://www.evanlovely.com/2023/01/27/the-readability-of.html"
+			},
+			{
+				"id": "http://evanlovely.micro.blog/2023/01/26/when-to-reach.html",
+				"title": "When to reach for different JS methods while manipulating data",
+				"content_html": "<h1 id=\"array---array-structure-different-length-same\">Array -&gt; Array; structure different, length same</h1>\n<p>Reach for <code>.map</code></p>\n<h1 id=\"array---array-structure-same-length-different\">Array -&gt; Array; structure same, length different</h1>\n<p>Reach for <code>.filter</code></p>\n<h1 id=\"array---non-array-like-object\">Array -&gt; Non-Array (like Object)</h1>\n<p>Reach for <code>.reduce</code> - easily one of the most powerful and flexible Array methods.</p>\n<h1 id=\"object---object-structure-different-length-same\">Object -&gt; Object; structure different, length same</h1>\n<p>The &ldquo;entries&rdquo; are super helpful, given an object like this:</p>\n<div class=\"highlight\"><pre tabindex=\"0\" style=\"color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\"><code class=\"language-js\" data-lang=\"js\"><span style=\"color:#66d9ef\">const</span> <span style=\"color:#a6e22e\">data</span> <span style=\"color:#f92672\">=</span> {\n  <span style=\"color:#a6e22e\">firstName</span><span style=\"color:#f92672\">:</span> <span style=\"color:#e6db74\">&#39;Evan&#39;</span>,\n  <span style=\"color:#a6e22e\">lastName</span><span style=\"color:#f92672\">:</span> <span style=\"color:#e6db74\">&#39;Lovely&#39;</span>,\n}\n</code></pre></div><p>The &ldquo;entries&rdquo; (what you get if ran <code>Object.entries(data)</code>) would be:</p>\n<div class=\"highlight\"><pre tabindex=\"0\" style=\"color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\"><code class=\"language-js\" data-lang=\"js\">[\n  [<span style=\"color:#e6db74\">&#39;firstName&#39;</span>, <span style=\"color:#e6db74\">&#39;Evan&#39;</span>],\n  [<span style=\"color:#e6db74\">&#39;lastName&#39;</span>, <span style=\"color:#e6db74\">&#39;Lovely&#39;</span>],\n]\n</code></pre></div><p>Being able to go to with <code>Object.entries</code> and from with <code>Object.fromEntries</code> is very powerful and you then can use all the Array methods to do manipulations - so in the case of structure different, length same you&rsquo;d reach for <code>.map</code>:</p>\n<div class=\"highlight\"><pre tabindex=\"0\" style=\"color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\"><code class=\"language-js\" data-lang=\"js\">Object.<span style=\"color:#a6e22e\">fromEntries</span>(\n  Object.<span style=\"color:#a6e22e\">entries</span>(<span style=\"color:#a6e22e\">myObject</span>).<span style=\"color:#a6e22e\">map</span>(([<span style=\"color:#a6e22e\">key</span>, <span style=\"color:#a6e22e\">value</span>]) =&gt; {\n    <span style=\"color:#75715e\">// manipulate\n</span><span style=\"color:#75715e\"></span>    <span style=\"color:#66d9ef\">return</span> [<span style=\"color:#a6e22e\">key</span>, <span style=\"color:#a6e22e\">value</span>];\n  }),\n);\n</code></pre></div><h1 id=\"array---array-different-structure-different-length\">Array -&gt; Array; different structure, different length</h1>\n<p>It&rsquo;s common to chain <code>.filter</code> and <code>.map</code> together which works great if you are wanting a smaller number of items than you started with, but if you want to have the list grow - you&rsquo;ll need to reach for something more powerful: <code>.flatMap</code>.</p>\n<p>The common use of <code>.flatMap</code> is to use <code>.map</code> and then if you end up with an array of arrays to <code>.flat</code> them - however it can be much more powerful than that, from the MDN docs page:</p>\n<blockquote>\n<p><strong>For adding and removing items during a map()</strong></p>\n<p><code>flatMap</code> can be used as a way to add and remove items (modify the number of items) during a <code>map</code>. In other words, it allows you to map many items to many items (by handling each input item separately), rather than always one-to-one. In this sense, it works like the opposite of <code>filter</code>. <em>Return a 1-element array to keep the item, a multiple-element array to add items, or a 0-element array to remove the item.</em></p>\n</blockquote>\n",
+				"content_text": "# Array -> Array; structure different, length same\n\nReach for `.map`\n\n# Array -> Array; structure same, length different\n\nReach for `.filter`\n\n# Array -> Non-Array (like Object)\n\nReach for `.reduce` - easily one of the most powerful and flexible Array methods.\n\n# Object -> Object; structure different, length same\n\nThe \"entries\" are super helpful, given an object like this:\n\n```js\nconst data = {\n  firstName: 'Evan',\n  lastName: 'Lovely',\n}\n```\n\nThe \"entries\" (what you get if ran `Object.entries(data)`) would be:\n\n```js\n[\n  ['firstName', 'Evan'],\n  ['lastName', 'Lovely'],\n]\n```\n\nBeing able to go to with `Object.entries` and from with `Object.fromEntries` is very powerful and you then can use all the Array methods to do manipulations - so in the case of structure different, length same you'd reach for `.map`:\n\n```js\nObject.fromEntries(\n  Object.entries(myObject).map(([key, value]) => {\n    // manipulate\n    return [key, value];\n  }),\n);\n```\n\n# Array -> Array; different structure, different length\n\nIt's common to chain `.filter` and `.map` together which works great if you are wanting a smaller number of items than you started with, but if you want to have the list grow - you'll need to reach for something more powerful: `.flatMap`.\n\nThe common use of `.flatMap` is to use `.map` and then if you end up with an array of arrays to `.flat` them - however it can be much more powerful than that, from the MDN docs page:\n\n>**For adding and removing items during a map()**\n>\n>`flatMap` can be used as a way to add and remove items (modify the number of items) during a `map`. In other words, it allows you to map many items to many items (by handling each input item separately), rather than always one-to-one. In this sense, it works like the opposite of `filter`. *Return a 1-element array to keep the item, a multiple-element array to add items, or a 0-element array to remove the item.*\n",
+				"date_published": "2023-01-26T22:55:26-07:00",
+				"url": "https://www.evanlovely.com/2023/01/26/when-to-reach.html",
+				"tags": ["Code"]
+			}
+	]
+}
