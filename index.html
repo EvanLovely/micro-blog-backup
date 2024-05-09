@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta name="generator" content="Hugo 0.91.2" />
+
+  <title>
+      
+      Evan Lovely
+      
+  </title>
+
+</head>
+
+
+  <body>
+
+    
+
+	
+<div class="h-feed">
+
+	
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://www.evanlovely.com/2024/05/09/a-case-study.html">A case study of Client Side Rendering</a></h1>
+		
+
+		<a href="https://www.evanlovely.com/2024/05/09/a-case-study.html" class="u-url"><time class="dt-published" datetime="2024-05-09 09:15:56 -0700">May 9, 2024</time></a>
+
+		<div class="e-content">
+			 <p>Wow, <a href="https://github.com/theninthsky/client-side-rendering">this</a> has to be one of the best write ups of how to optimize your Webpack config that I’ve seen. Great dive into React page routing optimization as well.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://www.evanlovely.com/2023/01/28/great-sunset-clouds.html" class="u-url"><time class="dt-published" datetime="2023-01-28 09:02:16 -0700">Jan 28, 2023</time></a>
+
+		<div class="e-content">
+			 <p>Great sunset clouds by Mt Hood</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://www.evanlovely.com/2023/01/27/the-readability-of.html" class="u-url"><time class="dt-published" datetime="2023-01-27 10:54:32 -0700">Jan 27, 2023</time></a>
+
+		<div class="e-content">
+			 <p>The readability of bash always makes me think about how it was made by people who used to be legitimately concerned that more characters used in code actually made a program slower.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://www.evanlovely.com/2023/01/26/when-to-reach.html">When to reach for different JS methods while manipulating data</a></h1>
+		
+
+		<a href="https://www.evanlovely.com/2023/01/26/when-to-reach.html" class="u-url"><time class="dt-published" datetime="2023-01-26 22:55:26 -0700">Jan 26, 2023</time></a>
+
+		<div class="e-content">
+			 <h1 id="array---array-structure-different-length-same">Array -&gt; Array; structure different, length same</h1>
+<p>Reach for <code>.map</code></p>
+<h1 id="array---array-structure-same-length-different">Array -&gt; Array; structure same, length different</h1>
+<p>Reach for <code>.filter</code></p>
+<h1 id="array---non-array-like-object">Array -&gt; Non-Array (like Object)</h1>
+<p>Reach for <code>.reduce</code> - easily one of the most powerful and flexible Array methods.</p>
+<h1 id="object---object-structure-different-length-same">Object -&gt; Object; structure different, length same</h1>
+<p>The &ldquo;entries&rdquo; are super helpful, given an object like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">firstName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Evan&#39;</span>,
+  <span style="color:#a6e22e">lastName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Lovely&#39;</span>,
+}
+</code></pre></div><p>The &ldquo;entries&rdquo; (what you get if ran <code>Object.entries(data)</code>) would be:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[
+  [<span style="color:#e6db74">&#39;firstName&#39;</span>, <span style="color:#e6db74">&#39;Evan&#39;</span>],
+  [<span style="color:#e6db74">&#39;lastName&#39;</span>, <span style="color:#e6db74">&#39;Lovely&#39;</span>],
+]
+</code></pre></div><p>Being able to go to with <code>Object.entries</code> and from with <code>Object.fromEntries</code> is very powerful and you then can use all the Array methods to do manipulations - so in the case of structure different, length same you&rsquo;d reach for <code>.map</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">Object.<span style="color:#a6e22e">fromEntries</span>(
+  Object.<span style="color:#a6e22e">entries</span>(<span style="color:#a6e22e">myObject</span>).<span style="color:#a6e22e">map</span>(([<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>]) =&gt; {
+    <span style="color:#75715e">// manipulate
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> [<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>];
+  }),
+);
+</code></pre></div><h1 id="array---array-different-structure-different-length">Array -&gt; Array; different structure, different length</h1>
+<p>It&rsquo;s common to chain <code>.filter</code> and <code>.map</code> together which works great if you are wanting a smaller number of items than you started with, but if you want to have the list grow - you&rsquo;ll need to reach for something more powerful: <code>.flatMap</code>.</p>
+<p>The common use of <code>.flatMap</code> is to use <code>.map</code> and then if you end up with an array of arrays to <code>.flat</code> them - however it can be much more powerful than that, from the MDN docs page:</p>
+<blockquote>
+<p><strong>For adding and removing items during a map()</strong></p>
+<p><code>flatMap</code> can be used as a way to add and remove items (modify the number of items) during a <code>map</code>. In other words, it allows you to map many items to many items (by handling each input item separately), rather than always one-to-one. In this sense, it works like the opposite of <code>filter</code>. <em>Return a 1-element array to keep the item, a multiple-element array to add items, or a 0-element array to remove the item.</em></p>
+</blockquote>
+
+		</div>
+	  </div>
+	
+
+</div>
+
+
+    
+    
+
+  </body>
+
+</html>
